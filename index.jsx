@@ -90,6 +90,10 @@ const render = ({ output, error }) => {
 
   const displayId = parseInt(window.location.pathname.replace('/', ''))
   const displayIndex = displays.find((d) => d.id === displayId).index
+  const visibleSpaces = spaces.reduce((acc, space) => {
+    const { 'is-visible': isVisible, visible: __legacyIsVisible, index } = space
+    return isVisible ?? __legacyIsVisible ? [...acc, index] : acc
+  }, [])
 
   const classes = Utils.classnames(baseClasses, { 'simple-bar--no-shadow': shadow !== 'on' })
 
